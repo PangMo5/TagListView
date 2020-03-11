@@ -378,8 +378,8 @@ open class TagListView: UIView {
     }
 
     @discardableResult
-    open func addTags(titleWithColors: [String: UIColor]) -> [TagView] {
-        return addTagViews(titleWithColors.map{createNewTagView($0, withBackgroundColor: $1)})
+    open func addTags(titleWithColors: [(String, UIColor)]) -> [TagView] {
+        return addTagViews(titleWithColors.map{createNewTagView($0.0, withBackgroundColor: $0.1)})
     }
     
     @discardableResult
