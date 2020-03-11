@@ -327,12 +327,12 @@ open class TagListView: UIView {
         return CGSize(width: frame.width, height: height)
     }
     
-    private func createNewTagView(_ title: String, withBackgroundColor tagBackgroundColor: UIColor? = nil) -> TagView {
+    private func createNewTagView(_ title: String, withBackgroundColor forceTagBackgroundColor: UIColor? = nil) -> TagView {
         let tagView = TagView(title: title)
         
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
-        tagView.tagBackgroundColor = tagBackgroundColor ?? self.tagBackgroundColor
+        tagView.tagBackgroundColor = forceTagBackgroundColor ?? self.tagBackgroundColor
         tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
         tagView.selectedBackgroundColor = tagSelectedBackgroundColor
         tagView.titleLineBreakMode = tagLineBreakMode
@@ -361,9 +361,9 @@ open class TagListView: UIView {
     }
 
     @discardableResult
-    open func addTag(_ title: String, withBackgroundColor tagBackgroundColor: UIColor? = nil) -> TagView {
+    open func addTag(_ title: String, withBackgroundColor forceTagBackgroundColor: UIColor? = nil) -> TagView {
         defer { rearrangeViews() }
-        return addTagView(createNewTagView(title, withBackgroundColor: tagBackgroundColor))
+        return addTagView(createNewTagView(title, withBackgroundColor: forceTagBackgroundColor))
     }
 
     @discardableResult
@@ -404,7 +404,6 @@ open class TagListView: UIView {
         return insertTagView(createNewTagView(title), at: index)
     }
     
-
     @discardableResult
     open func insertTagView(_ tagView: TagView, at index: Int) -> TagView {
         defer { rearrangeViews() }
