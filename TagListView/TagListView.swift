@@ -40,10 +40,10 @@ open class TagListView: UIView {
         }
     }
     
-    @IBInspectable open dynamic var defaultTagBackgroundColor: UIColor = UIColor.gray {
+    @IBInspectable open dynamic var tagBackgroundColor: UIColor = UIColor.gray {
         didSet {
             tagViews.forEach {
-                $0.tagBackgroundColor = defaultTagBackgroundColor
+                $0.tagBackgroundColor = tagBackgroundColor
             }
         }
     }
@@ -332,7 +332,7 @@ open class TagListView: UIView {
         
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
-        tagView.tagBackgroundColor = tagBackgroundColor ?? defaultTagBackgroundColor
+        tagView.tagBackgroundColor = tagBackgroundColor ?? self.tagBackgroundColor
         tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
         tagView.selectedBackgroundColor = tagSelectedBackgroundColor
         tagView.titleLineBreakMode = tagLineBreakMode
