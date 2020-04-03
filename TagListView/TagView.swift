@@ -246,7 +246,7 @@ open class TagView: UIButton {
         }
         if leftImage != nil {
             leftImageView.frame.size.width = leftImageViewSize
-            leftImageView.frame.origin.x = paddingX + leftImageView.frame.width
+            leftImageView.frame.origin.x = paddingX + leftImageView.frame.width / 2
             leftImageView.frame.size.height = leftImageViewSize
             leftImageView.frame.origin.y = self.frame.midY - leftImageViewSize / 2
         }

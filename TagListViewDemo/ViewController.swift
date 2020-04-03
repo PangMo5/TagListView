@@ -46,6 +46,11 @@ class ViewController: UIViewController, TagListViewDelegate {
         biggerTagListView.addTag("Pomotodo")
         biggerTagListView.addTag("Halo Word")
         biggerTagListView.alignment = .center
+        if #available(iOS 13.0, *) {
+            biggerTagListView.leftImage = UIImage(systemName: "tag")
+        } else {
+            // Fallback on earlier versions
+        }
         
         biggestTagListView.delegate = self
         biggestTagListView.textFont = .systemFont(ofSize: 24)
