@@ -53,6 +53,7 @@ open class TagView: UIButton {
     @IBInspectable open var paddingX: CGFloat = 5 {
         didSet {
             titleEdgeInsets.left = paddingX
+            updateLeftInsets()
             updateRightInsets()
         }
     }
@@ -245,7 +246,7 @@ open class TagView: UIButton {
         }
         if leftImage != nil {
             leftImageView.frame.size.width = leftImageViewSize
-            leftImageView.frame.origin.x = paddingX + paddingX / 2 - leftImageViewSize
+            leftImageView.frame.origin.x = paddingX
             leftImageView.frame.size.height = leftImageViewSize
             leftImageView.frame.origin.y = self.frame.midY - leftImageViewSize / 2
         }
