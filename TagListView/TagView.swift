@@ -86,7 +86,23 @@ open class TagView: UIButton {
             titleLabel?.font = textFont
         }
     }
-    
+
+    var leftImageView = UIImageView()
+
+    open var leftImage: UIImage? {
+        didSet {
+            leftImageView.isHidden = leftImage == nil
+            leftImageView.image = leftImage
+            updateLeftInsets()
+        }
+    }
+
+    open var leftImageViewSize: CGFloat = 7 {
+        didSet {
+            updateLeftInsets()
+        }
+    }
+
     private func reloadStyles() {
         if isHighlighted {
             if let highlightedBackgroundColor = highlightedBackgroundColor {
@@ -168,9 +184,11 @@ open class TagView: UIButton {
     }
     
     private func setupView() {
+        leftImageView.contentMode = .scaleAspectFit
         titleLabel?.lineBreakMode = titleLineBreakMode
 
         frame.size = intrinsicContentSize
+        addSubview(leftImageView)
         addSubview(removeButton)
         removeButton.tagView = self
         
@@ -194,12 +212,23 @@ open class TagView: UIButton {
         if enableRemoveButton {
             size.width += removeButtonIconSize + paddingX
         }
+        if leftImage != nil {
+            size.width += removeButtonIconSize + paddingX / 2
+        }
         return size
+    }
+
+    private func updateLeftInsets() {
+        if leftImage == nil {
+            titleEdgeInsets.left = paddingX
+        } else {
+            titleEdgeInsets.left = paddingX + leftImageViewSize + paddingX / 2
+        }
     }
     
     private func updateRightInsets() {
         if enableRemoveButton {
-            titleEdgeInsets.right = paddingX  + removeButtonIconSize + paddingX
+            titleEdgeInsets.right = paddingX + removeButtonIconSize + paddingX
         }
         else {
             titleEdgeInsets.right = paddingX
@@ -213,6 +242,12 @@ open class TagView: UIButton {
             removeButton.frame.origin.x = self.frame.width - removeButton.frame.width
             removeButton.frame.size.height = self.frame.height
             removeButton.frame.origin.y = 0
+        }
+        if leftImage != nil {
+            leftImageView.frame.size.width = leftImageViewSize
+            leftImageView.frame.origin.x = paddingX + paddingX / 2 - leftImageViewSize
+            leftImageView.frame.size.height = leftImageViewSize
+            leftImageView.frame.origin.y = self.frame.midY - leftImageViewSize / 2
         }
     }
 }

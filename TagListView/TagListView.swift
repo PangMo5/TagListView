@@ -198,6 +198,24 @@ open class TagListView: UIView {
             }
         }
     }
+
+    @objc open dynamic var leftImage: UIImage? {
+        didSet {
+            defer { rearrangeViews() }
+            tagViews.forEach {
+                $0.leftImage = leftImage
+            }
+        }
+    }
+
+    @objc open dynamic var leftImageViewSize: CGFloat = 7 {
+        didSet {
+            defer { rearrangeViews() }
+            tagViews.forEach {
+                $0.leftImageViewSize = leftImageViewSize
+            }
+        }
+    }
     
     @IBOutlet open weak var delegate: TagListViewDelegate?
     
@@ -347,6 +365,8 @@ open class TagListView: UIView {
         tagView.removeButtonIconSize = removeButtonIconSize
         tagView.enableRemoveButton = enableRemoveButton
         tagView.removeIconLineColor = removeIconLineColor
+        tagView.leftImage = leftImage
+        tagView.leftImageViewSize = leftImageViewSize
         tagView.addTarget(self, action: #selector(tagPressed(_:)), for: .touchUpInside)
         tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), for: .touchUpInside)
         
