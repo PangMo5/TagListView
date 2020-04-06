@@ -22,13 +22,13 @@ open class TagView: UIButton {
             layer.borderWidth = borderWidth
         }
     }
-    
+
     @IBInspectable open var borderColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
-    
+
     @IBInspectable open var textColor: UIColor = UIColor.white {
         didSet {
             reloadStyles()
@@ -63,25 +63,25 @@ open class TagView: UIButton {
             reloadStyles()
         }
     }
-    
+
     @IBInspectable open var highlightedBackgroundColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
-    
+
     @IBInspectable open var selectedBorderColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
-    
+
     @IBInspectable open var selectedBackgroundColor: UIColor? {
         didSet {
             reloadStyles()
         }
     }
-    
+
     @IBInspectable open var textFont: UIFont = .systemFont(ofSize: 12) {
         didSet {
             titleLabel?.font = textFont
@@ -123,37 +123,37 @@ open class TagView: UIButton {
             setTitleColor(textColor, for: UIControl.State())
         }
     }
-    
+
     override open var isHighlighted: Bool {
         didSet {
             reloadStyles()
         }
     }
-    
+
     override open var isSelected: Bool {
         didSet {
             reloadStyles()
         }
     }
-    
+
     // MARK: remove button
-    
+
     let removeButton = CloseButton()
-    
+
     @IBInspectable open var enableRemoveButton: Bool = false {
         didSet {
             removeButton.isHidden = !enableRemoveButton
             updateRightInsets()
         }
     }
-    
+
     @IBInspectable open var removeButtonIconSize: CGFloat = 12 {
         didSet {
             removeButton.iconSize = removeButtonIconSize
             updateRightInsets()
         }
     }
-    
+
     @IBInspectable open var removeIconLineWidth: CGFloat = 3 {
         didSet {
             removeButton.lineWidth = removeIconLineWidth
@@ -164,26 +164,26 @@ open class TagView: UIButton {
             removeButton.lineColor = removeIconLineColor
         }
     }
-    
+
     /// Handles Tap (TouchUpInside)
     open var onTap: ((TagView) -> Void)?
     open var onLongPress: ((TagView) -> Void)?
-    
+
     // MARK: - init
-    
+
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         setupView()
     }
-    
+
     public init(title: String) {
         super.init(frame: CGRect.zero)
         setTitle(title, for: UIControl.State())
-        
+
         setupView()
     }
-    
+
     private func setupView() {
         leftImageView.contentMode = .scaleAspectFit
         titleLabel?.lineBreakMode = titleLineBreakMode
@@ -192,15 +192,15 @@ open class TagView: UIButton {
         addSubview(leftImageView)
         addSubview(removeButton)
         removeButton.tagView = self
-        
+
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress))
         self.addGestureRecognizer(longPress)
     }
-    
+
     @objc func longPress() {
         onLongPress?(self)
     }
-    
+
     // MARK: - layout
 
     override open var intrinsicContentSize: CGSize {
@@ -226,7 +226,7 @@ open class TagView: UIButton {
             titleEdgeInsets.left = paddingX + leftImageViewSize + paddingX / 2
         }
     }
-    
+
     private func updateRightInsets() {
         if enableRemoveButton {
             titleEdgeInsets.right = paddingX + removeButtonIconSize + paddingX
@@ -235,7 +235,7 @@ open class TagView: UIButton {
             titleEdgeInsets.right = paddingX
         }
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         if enableRemoveButton {
@@ -246,7 +246,7 @@ open class TagView: UIButton {
         }
         if leftImage != nil {
             leftImageView.frame.size.width = leftImageViewSize
-            leftImageView.frame.origin.x = paddingX + leftImageView.frame.width / 2
+            leftImageView.frame.origin.x = paddingX
             leftImageView.frame.size.height = leftImageViewSize
             leftImageView.frame.origin.y = self.frame.midY - leftImageViewSize / 2
         }
@@ -256,9 +256,9 @@ open class TagView: UIButton {
 /// Swift < 4.2 support
 #if !(swift(>=4.2))
 private extension NSAttributedString {
-    typealias Key = NSAttributedStringKey
+typealias Key = NSAttributedStringKey
 }
 private extension UIControl {
-    typealias State = UIControlState
+typealias State = UIControlState
 }
 #endif
