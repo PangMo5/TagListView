@@ -214,7 +214,7 @@ open class TagView: UIButton {
             size.width += removeButtonIconSize + paddingX
         }
         if leftImage != nil {
-            size.width += removeButtonIconSize + paddingX / 2
+            size.width += leftImageViewSize + paddingX / 2
         }
         return size
     }
